@@ -1,0 +1,58 @@
+<style>
+    #top-menu-languages {
+        display: flex;
+        width: auto;
+        padding-left: 15px;
+    }
+
+    .lang-single {
+        display: inline-flex;
+        padding: 5px;
+        justify-content: center;
+        align-items: center;
+        text-transform: uppercase;
+    }
+
+    .lang-single img {
+        max-width: 40px;
+        padding-right: 3px;
+    }
+</style>
+
+<div id="top-menu-languages">
+</div>
+
+<script>
+    var select = $('#top-menu-languages');
+    
+    function createLinks(t, i, s, l, logo) {
+        l.forEach(function(lang) {
+            var n = window.location.pathname;
+            var e = lang.iso_code.replace(' ','');
+
+            var link = "";
+
+            if (e == "de") {
+                link = '' + s + n.replace('/' + i, '');
+            } else {
+                link = s + '/' + e + n;
+            }
+            var option = '<a class="lang-single" href="'+ link +'" data-value="' + lang.iso_code + '"><span class="img-icon"><img src=" ' + lang.logo + '" /></span></a>';
+            $(option).appendTo(select);
+            
+        });  
+    }
+
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        var languages1 = buildLanguageList();
+        var shopDomain1 = 'https://{{shop.domain}}';
+        var defaultLocale1 = primaryLanguage1 ? primaryLanguage1.iso_code : 'en';
+        var primaryLanguage1 = languages1.find(function (x) { return x.primary; });
+        var logoLanguage1 = languages1.find(function (x) { return x.logo; });
+        var currentLocale1 = findCurrentLocale(languages1, defaultLocale1);
+
+        createLinks(defaultLocale1, currentLocale1, shopDomain1, languages1, logoLanguage1)
+    });
+
+</script>

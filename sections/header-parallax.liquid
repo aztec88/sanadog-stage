@@ -210,12 +210,13 @@
                                 </span>
                             </a>                    
                         </div>
-                        {% if settings.enable_multilang_shopify or settings.enable_multiple_currencies or settings.enable_shopify_payments_currencies %}
-                        <div class="hamburger-icon svg-mb">
+                        {% if settings.enable_multilang_shopify %}
+                            {% comment %} <div class="hamburger-icon svg-mb">
                             <a href="#" class="icon-nav" title="Menu Mobile Icon" data-show-options>
                                 <span class="icon-line"></span>
                             </a>
-                        </div>
+                        </div>  {% endcomment %}
+                            {% render 'top-menu-language-switcher' %}
                         {% endif %}
                     </div>
                 </div>
